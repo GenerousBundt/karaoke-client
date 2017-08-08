@@ -1,8 +1,14 @@
+import Song from './Song';
+import PropTypes from 'prop-types';
+
 var React = require('react');
-var Song= require('./Song');
 
-var SetList = React.createClass({
 
+class SetList extends React.Component {
+    constructor(props){
+        super(props);
+        console.log("sessionId: ", this.props.sessionId);
+    }
     
 
     render(){
@@ -30,6 +36,10 @@ var SetList = React.createClass({
 
     }
 
-});
+};
+SetList.propTypes = {
 
-module.exports = SetList;
+}
+
+
+export default SetList;

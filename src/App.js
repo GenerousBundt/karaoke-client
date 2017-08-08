@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import logo from './resources/man-singing.svg';
 import './App.css';
+import SetList from './components/SetList';
+import * as Session from './components/Session';
 
-var SetList = require('./components/SetList');
-var Session = require('./components/Session');
+
 var NewSong = require('./components/NewSong');
 var Song = require('./components/Song');
 
@@ -22,7 +23,7 @@ class App extends Component {
 
         </div>
         <div>
-          <SetList />
+          <SetList sessionId={Session.getSession()}/>
         </div>
         
         {/*Add Your Song*/}

@@ -1,11 +1,12 @@
+import PropTypes from 'prop-types';
 var React = require('react');
 
-var Song = React.createClass({
-    propTypes:{
-        title: React.PropTypes.string.isRequired,
-        stageName: React.PropTypes.string.isRequired,
-    },
 
+class Song extends React.Component{
+    constructor(props){
+        super(props);
+    }
+    
     render(){
         
         var cn = "list-group-item";
@@ -19,7 +20,10 @@ var Song = React.createClass({
         )
 
     }
+}
+Song.propTypes = {
+    title: React.PropTypes.string.isRequired,
+    stageName: React.PropTypes.string.isRequired,
+};
 
-});
-
-module.exports = Song;
+export default Song;
