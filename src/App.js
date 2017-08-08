@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import logo from './resources/man-singing.svg';
 import './App.css';
 import SetList from './components/SetList';
-import * as Session from './components/Session';
+import * as Session from './services/Session';
 
 
 var NewSong = require('./components/NewSong');
 var Song = require('./components/Song');
+
+//TODO: GetSession: If sessionid = -1, show div saying Please wait for session to be created.
+// If not -1, pass sessionId to SetList component.
+function GetSession() {
+  console.log("sessionId: ", Session.getSession());
+};
 
 class App extends Component {
   render() {
@@ -23,7 +29,7 @@ class App extends Component {
 
         </div>
         <div>
-          <SetList sessionId={Session.getSession()}/>
+          <SetList sessionId={ GetSession()}/>
         </div>
         
         {/*Add Your Song*/}
