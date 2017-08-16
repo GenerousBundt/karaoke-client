@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import '../App.css';
 var React = require('react');
 
 
@@ -12,11 +13,11 @@ class Song extends React.Component{
         var cn = "list-group-item";
 
         return (
-            <a className={cn}>
+            <div className="Song">
                 {this.props.address}
                 <div className="song-title">{this.props.title}</div>
                 <div className="song-stageName">{this.props.stageName}</div>
-            </a>
+            </div>
         )
 
     }
