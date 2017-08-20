@@ -10,9 +10,6 @@ var Song = require('./components/Song');
 
 //TODO: GetSession: If sessionid = -1, show div saying Please wait for session to be created.
 // If not -1, pass sessionId to SetList component.
-async function GetSession() {
-  return Session.getSession();
-};
 
 class App extends Component {
   constructor(){
@@ -20,9 +17,20 @@ class App extends Component {
     this.state = { sessionId: null }
   }
 
-  componentDidMount() {
-    Session.getSession().then(response => this.setState({session: response}))
+  componentWillMount() {
+    this.getSession();
   }
+
+  async getSession(){
+    fetch('http://localhost:5000/api/Session')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({sessionId: responseJson.sessionId});
+      return responseJson.sessionId
+    }
+    )
+  
+}
 
   renderSongList() {
     return (    
@@ -39,7 +47,7 @@ class App extends Component {
         </div>
         <div>
 
-          <SetList sessionId={ this.state.sessionId }/>
+          <SetList session={ this.state.sessionId }/>
         </div>
         
         {/*Add Your Song*/}
@@ -49,8 +57,7 @@ class App extends Component {
   }
 
   render() {
-    const { currentSessionId } = this.state
-    return currentSessionId ? this.renderSongList() : (
+    return this.state.sessionId ? this.renderSongList() : (
       <span>Loading session... </span>
       
     );
