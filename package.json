@@ -5,7 +5,9 @@
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-scripts": "1.0.10"
+    "react-popup": "^0.8.0",
+    "react-scripts": "1.0.10",
+    "universal-cookie": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
