@@ -6,7 +6,7 @@ import Home from './components/Home';
 
 class App extends Component {
 
-  //remove when authentication page is active
+  //remove when authentication page is active. We'll set the auth cookie there...
   componentWillMount(){
     const cookies = new Cookies();
     cookies.set('authCookie', 'Authenticated');
