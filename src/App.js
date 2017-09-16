@@ -23,7 +23,26 @@ class App extends Component {
 
   render() {
     return (
-      <Home userIsAdmin = {this.cookieIsPresent()} />
+
+      <div className="app">
+      <div className="app-header">
+        {/* <img src={logo} className="app-logo" alt="logo" /> */}
+        <h2>Welcome to Beaudry Karaoke </h2>
+      </div>
+      <div className="app-songlist">
+        {/*Tonight's list, Top song marked, up next*/}
+        Tonight's song list <br />
+        <button> Here's a button </button>
+
+      </div>
+      <div>
+        <Home userIsAdmin = {this.cookieIsPresent()} />
+      </div>
+      
+    </div>
+
+
+      
     );
       
   }
