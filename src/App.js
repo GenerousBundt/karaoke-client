@@ -31,6 +31,11 @@ class App extends Component {
     };
   }
   render() {
+    const renderMain = () => {
+      return (
+        <Main adminSession={this.userIsAdmin()} />
+      )
+    }
     return (
 
       <div className="app">
@@ -46,10 +51,9 @@ class App extends Component {
       </div>
       <div>
         <Switch>
-          <Route exact path='/' component={Main}/>
+          <Route exact path='/' component={renderMain}/>
           <Route path='/BriansSecretPath' component={Auth}/>
           <Route path='/Admin' component={Main} onEnter={this.requireAuth()} />
-          {/* <Route path='/schedule' component={Schedule}/> */}
         </Switch>
       </div>
       

@@ -6,21 +6,14 @@ import Home from './Home';
 import Auth from './Auth';
 
 class Main extends Component{
-
-
-  userIsAdmin(){
-    //return true if administrator cookie is present
-    var cookies = new Cookies();
-    if(cookies.get('authCookie') === 'Authenticated')
-      return true;
-    else
-      return false;
-  }
+    constructor(props){
+        super(props);
+    }
 
     render() {
         return (
             <div>
-            <Home userIsAdmin = {this.userIsAdmin()} />
+            <Home userIsAdmin = {this.props.adminSession} />
           </div>
         );
     }
