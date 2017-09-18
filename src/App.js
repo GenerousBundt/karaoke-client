@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
+
+import {Switch, Route} from 'react-router-dom';
 import Cookies from 'universal-cookie';
+
 import './App.css';
-import Home from './components/Home';
+import Main from './components/Main';
+import Auth from './components/Auth';
+
+
 
 
 class App extends Component {
-
-  //remove when authentication page is active. We'll set the auth cookie there...
-  componentWillMount(){
-    const cookies = new Cookies();
-    cookies.set('authCookie', 'Authenticated');
+  constructor(props){
+    super(props);
   }
 
-  cookieIsPresent(){
-    //return true if administrator cookie is present
+  userIsAdmin(){
     var cookies = new Cookies();
     if(cookies.get('authCookie') === 'Authenticated')
       return true;
@@ -21,6 +23,13 @@ class App extends Component {
       return false;
   }
 
+  requireAuth(nextState, replace) {
+    if(!this.userIsAdmin()){
+      replace({
+        pathname: '/BriansSecrePath'
+      })
+    };
+  }
   render() {
     return (
 
@@ -36,7 +45,12 @@ class App extends Component {
 
       </div>
       <div>
-        <Home userIsAdmin = {this.cookieIsPresent()} />
+        <Switch>
+          <Route exact path='/' component={Main}/>
+          <Route path='/BriansSecretPath' component={Auth}/>
+          <Route path='/Admin' component={Main} onEnter={this.requireAuth()} />
+          {/* <Route path='/schedule' component={Schedule}/> */}
+        </Switch>
       </div>
       
     </div>

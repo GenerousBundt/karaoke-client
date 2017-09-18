@@ -15,3 +15,19 @@ export function renderSongList(sessionId, draggable) {
     .then((response) => response.json())
      .then((responseJson) => { return responseJson.sessionId});
 }
+
+export function authLogin(userName, password){
+  return fetch('http://localhost:5000/api/Authorization', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      UserName: userName,
+      Password: password,
+    })
+  })
+  .then((response) => response.json())
+  .then((responseJson) => {return responseJson.userIsAdmin});
+}
