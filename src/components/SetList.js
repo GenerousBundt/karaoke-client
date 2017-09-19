@@ -40,7 +40,7 @@ class SetList extends React.Component {
         }
         else{
             return (
-                <SingerSetList songs = {songList} />
+                <SingerSetList songs = {songList} itemKey="key"/>
             )
         }
         
@@ -48,7 +48,7 @@ class SetList extends React.Component {
 
 };
 SetList.propTypes = {
-    session: React.PropTypes.number.isRequired,
+    sessionId: React.PropTypes.number.isRequired,
     draggable: React.PropTypes.bool.isRequired
 }
 

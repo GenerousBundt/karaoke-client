@@ -10,7 +10,7 @@ class SingerSetList extends React.Component{
 
     
     render(){
-        const { songs } = this.props;
+        const { songs, itemKey } = this.props;
 
         var singerSongList = songs.map((song) => 
         //<li>{song.title}</li>

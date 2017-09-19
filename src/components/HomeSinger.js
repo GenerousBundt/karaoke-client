@@ -22,7 +22,7 @@ class HomeSinger extends Component {
   render() {
     return (
       <div>
-      <PageTitle title="Tonight's Song List" />
+      <PageTitle title="Tonight's Song List" className="app-songlist" />
       <SetList sessionId={this.props.sessionId} draggable={false} />
     </div>
     );

@@ -22,14 +22,15 @@ class App extends Component {
       return false;
   }
 
-  requireAuth(nextState, replace) {
-    if(!this.userIsAdmin()){
-      replace({
-        pathname: '/AdminLogin'
-      })
-    };
-  }
+  
   render() {
+    const requireAuth = (nextState, replace) => {
+      if(!this.userIsAdmin()){
+        replace({
+          pathname: '/AdminLogin'
+        })
+      };
+    }
     const renderMain = () => {
       return (
         <Main adminSession={this.userIsAdmin()} />
@@ -45,7 +46,7 @@ class App extends Component {
         <Switch>
           <Route exact path='/' component={renderMain}/>
           <Route path='/AdminLogin' component={Auth}/>
-          <Route path='/Admin' component={Main} onEnter={this.requireAuth()} />
+          <Route path='/Admin' component={renderMain} onEnter={requireAuth} />
         </Switch>
       </div>
       
