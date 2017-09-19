@@ -31,7 +31,6 @@ class SetList extends React.Component {
         if(this.props.draggable){
             return (
                 <div className="list-group">
-                    <div className="">SongList</div>
                     <div>
                     <DraggableList list={songList} template={SongDraggable} itemKey="key" />
                     </div>

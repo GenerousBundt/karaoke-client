@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import SetList from './SetList';
 import * as Session from '../services/Session';
 import * as SongUtils from '../utils/songUtils';
+import PageTitle from './PageTitle';
 
 
 var NewSong = require('./NewSong');
@@ -19,9 +20,12 @@ class HomeAdmin extends Component {
 
 
   render() {
+    let songList
     return (
-        // refactor so this is just a setlist component
-          SongUtils.renderSongList(this.props.sessionId, true)
+      <div>
+        <PageTitle title="Admin View: Tonight's Song List" className="app-songlist" />
+        <SetList sessionId={this.props.sessionId} draggable={true} />
+      </div>
     );
   }
 }

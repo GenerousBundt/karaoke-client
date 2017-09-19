@@ -6,8 +6,7 @@ import Cookies from 'universal-cookie';
 import './App.css';
 import Main from './components/Main';
 import Auth from './components/Auth';
-
-
+import Header from './components/Header';
 
 
 class App extends Component {
@@ -26,7 +25,7 @@ class App extends Component {
   requireAuth(nextState, replace) {
     if(!this.userIsAdmin()){
       replace({
-        pathname: '/BriansSecrePath'
+        pathname: '/AdminLogin'
       })
     };
   }
@@ -39,20 +38,13 @@ class App extends Component {
     return (
 
       <div className="app">
-      <div className="app-header">
-        {/* <img src={logo} className="app-logo" alt="logo" /> */}
-        <h2>Welcome to Beaudry Karaoke </h2>
-      </div>
-      <div className="app-songlist">
-        {/*Tonight's list, Top song marked, up next*/}
-        Tonight's song list <br />
-        <button> Here's a button </button>
 
-      </div>
+      <Header />
+
       <div>
         <Switch>
           <Route exact path='/' component={renderMain}/>
-          <Route path='/BriansSecretPath' component={Auth}/>
+          <Route path='/AdminLogin' component={Auth}/>
           <Route path='/Admin' component={Main} onEnter={this.requireAuth()} />
         </Switch>
       </div>
