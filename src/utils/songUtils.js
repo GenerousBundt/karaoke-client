@@ -35,8 +35,19 @@ export function authLogin(userName, password){
 
 
 export function getSessionSongs(sessionId){
-  console.log("FETCHING: ", sessionId);
   return fetch('http://localhost:5000/api/Songs/'.concat(sessionId))
     .then((response) => response.json())
     .then((responseJson) =>  {return responseJson});
+}
+
+export function updateSongOrder(songs){
+  var jsonBody = JSON.stringify(songs);
+  return fetch('http://localhost:5000/api/Songs', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: jsonBody
+  });
 }

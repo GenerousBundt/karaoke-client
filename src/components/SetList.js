@@ -20,6 +20,11 @@ class SetList extends React.Component {
         SongUtils.getSessionSongs(this.props.sessionId).then((response) => this.setState({rawSongList: response}));
     }
 
+    onListChange(newList){
+        const newListWithOrder = newList.map(s => ({ ...s, order: newList.indexOf(s) }));
+        console.log('newListWithOrder: ', newListWithOrder);
+        this.updateSongOrder(newListWithOrder);
+    }
     getSongList(){
         var tempSongList = [];
         this.state.rawSongList.forEach(function(element) {
@@ -27,16 +32,24 @@ class SetList extends React.Component {
         }, this);
         return tempSongList;
     }
+
+    updateSongOrder(testList){
+        console.log('updateSongOrder', testList);
+        SongUtils.updateSongOrder(testList).then(response => {this.reloadSongList()});
+    }
+    reloadSongList(){
+        SongUtils.getSessionSongs(this.props.sessionId).then((response) => this.setState({rawSongList: response}));
+    }
     
     render(){
         
-        var songList = this.state.rawSongList ? this.getSongList() : [ ];
-            
+        var songList = this.state.rawSongList ? this.getSongList() : [];
+        console.log('songList: ', songList);
         if(this.props.draggable){
             return (
                 <div className="list-group">
                     <div>
-                    <DraggableList list={songList} template={SongDraggable} itemKey="songId" />
+                    <DraggableList list={songList} template={SongDraggable} itemKey="id" onMoveEnd={newList => this.onListChange(newList)}/>
                     </div>
                 </div>
             )
@@ -44,7 +57,7 @@ class SetList extends React.Component {
         }
         else{
             return (
-                <SingerSetList songs = {songList} itemKey="songId"/>
+                <SingerSetList songs = {songList} itemKey="id"/>
             )
         }
         
