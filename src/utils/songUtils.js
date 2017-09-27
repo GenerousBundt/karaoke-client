@@ -51,3 +51,20 @@ export function updateSongOrder(songs){
     body: jsonBody
   });
 }
+
+export function addStageNameToSession(stageName, sessionId){
+  return fetch('http://localhost:5000/api/StageNames', {
+    method: 'POST',
+    headers:{
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(
+      {
+        SessionId: sessionId,
+        Name: stageName,
+        IsActive: 1
+      }
+    )
+  })
+}

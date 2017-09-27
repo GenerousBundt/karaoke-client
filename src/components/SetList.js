@@ -3,6 +3,7 @@ import SongDraggable from './SongDraggable';
 import PropTypes from 'prop-types';
 import SingerSetList from './SingerSetList';
 import Song from '../models/song';
+import StageName from './StageName';
 
 import * as SongUtils from '../utils/songUtils';
 
@@ -22,7 +23,6 @@ class SetList extends React.Component {
 
     onListChange(newList){
         const newListWithOrder = newList.map(s => ({ ...s, order: newList.indexOf(s) }));
-        console.log('newListWithOrder: ', newListWithOrder);
         this.updateSongOrder(newListWithOrder);
     }
     getSongList(){
@@ -34,7 +34,6 @@ class SetList extends React.Component {
     }
 
     updateSongOrder(testList){
-        console.log('updateSongOrder', testList);
         SongUtils.updateSongOrder(testList).then(response => {this.reloadSongList()});
     }
     reloadSongList(){
@@ -44,20 +43,25 @@ class SetList extends React.Component {
     render(){
         
         var songList = this.state.rawSongList ? this.getSongList() : [];
-        console.log('songList: ', songList);
         if(this.props.draggable){
             return (
                 <div className="list-group">
                     <div>
                     <DraggableList list={songList} template={SongDraggable} itemKey="id" onMoveEnd={newList => this.onListChange(newList)}/>
                     </div>
+
                 </div>
+
             )
     
         }
         else{
             return (
+                <div>
                 <SingerSetList songs = {songList} itemKey="id"/>
+                
+                <StageName sessionId={this.props.sessionId} stageNameList={["Peaches", "Cream", "Brian"]} />
+                </div>
             )
         }
         

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import Cookies from 'universal-cookie';
 import * as SongUtils from '../utils/songUtils';
+import StageName from './StageName';
 
 
 
