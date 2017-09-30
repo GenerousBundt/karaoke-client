@@ -43,7 +43,6 @@ class SetList extends React.Component {
 
         return (
             <div className="SongList list-group">
-                <div className="">SongList</div>
                 <div>
                 <DraggableList list={songList} template={SongDraggable} itemKey="key" />
                 </div>
