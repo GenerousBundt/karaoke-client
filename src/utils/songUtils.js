@@ -71,8 +71,8 @@ export function addStageNameToSession(stageName, sessionId){
 
 export function getSessionStageNames(sessionId){
   return fetch('http://localhost:5000/api/StageNames/'.concat(sessionId))
-    .then((response) => {console.log("Response: ", response); return response.json()})
-    .then((responseJson) =>  {console.log("JsonResponse", responseJson); return responseJson});
+    .then((response) => {return response.json()})
+    .then((responseJson) =>  {return responseJson});
 }
 
 export function addSongToSession(song){
