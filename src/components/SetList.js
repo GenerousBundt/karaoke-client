@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import SingerSetList from './SingerSetList';
 import Song from '../models/song';
 import StageName from './StageName';
+import NewSong from './NewSong';
+import Button from '../common/Button';
 
 import * as SongUtils from '../utils/songUtils';
 
@@ -32,6 +34,9 @@ class SetList extends React.Component {
         }, this);
         return tempSongList;
     }
+    addSongToList(){
+        console.log("We're adding a song");
+    }
 
     updateSongOrder(testList){
         SongUtils.updateSongOrder(testList).then(response => {this.reloadSongList()});
@@ -40,12 +45,14 @@ class SetList extends React.Component {
         SongUtils.getSessionSongs(this.props.sessionId).then((response) => this.setState({rawSongList: response}));
     }
     
+    
     render(){
         
         var songList = this.state.rawSongList ? this.getSongList() : [];
         if(this.props.draggable){
             return (
                 <div className="list-group">
+                    <Button label="Add Song" onClick={this.addSongToList} />
                     <div>
                     <DraggableList list={songList} template={SongDraggable} itemKey="id" onMoveEnd={newList => this.onListChange(newList)}/>
                     </div>
@@ -58,9 +65,12 @@ class SetList extends React.Component {
         else{
             return (
                 <div>
+                <Button label="Add Song" onClick={this.addSongToList} />
                 <SingerSetList songs = {songList} itemKey="id"/>
                 
-                <StageName sessionId={this.props.sessionId} stageNameList={["Peaches", "Cream", "Brian"]} />
+                {/* <StageName sessionId={this.props.sessionId} stageNameList={["Peaches", "Cream", "Brian"]} /> */}
+
+                <NewSong sessionId={this.props.sessionId}/>
                 </div>
             )
         }

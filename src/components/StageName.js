@@ -41,11 +41,10 @@ class StageName extends Component {
               </label>
               
               <br />
-              <button
-              onPress={this.handleSubmit}
-                >
-                {"Let's go!"}
-              </button>
+              <input
+                type='submit'
+                value="Let's go!" 
+                />
               <br />
     
         </form>

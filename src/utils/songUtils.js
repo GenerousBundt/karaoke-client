@@ -42,7 +42,7 @@ export function getSessionSongs(sessionId){
 
 export function updateSongOrder(songs){
   var jsonBody = JSON.stringify(songs);
-  return fetch('http://localhost:5000/api/Songs', {
+  return fetch('http://localhost:5000/api/Setlist', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -66,5 +66,33 @@ export function addStageNameToSession(stageName, sessionId){
         IsActive: 1
       }
     )
-  })
+  });
+}
+
+export function getSessionStageNames(sessionId){
+  return fetch('http://localhost:5000/api/StageNames/'.concat(sessionId))
+    .then((response) => {console.log("Response: ", response); return response.json()})
+    .then((responseJson) =>  {console.log("JsonResponse", responseJson); return responseJson});
+}
+
+export function addSongToSession(song){
+  //var jsonBody = JSON.stringify(song);
+  return fetch('http://localhost:5000/api/Songs', {
+    method: 'POSt',
+    headers:{
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(
+      {
+        StageName: song.stageName,
+        Title: song.title,
+        Url: song.url,
+        SessionId: song.sessionId,
+        IsComplete: false,
+        Order: 99
+
+      }
+    )
+  });
 }
