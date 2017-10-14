@@ -33,6 +33,17 @@ export function authLogin(userName, password){
   .then((responseJson) => {return responseJson.userIsAdmin});
 }
 
+export function createNewSessionIfNoneActive(){
+  return fetch('http://localhost:5000/api/Session', {
+    method: 'POST',
+    headers:{
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+  })
+  .then((response) => {console.log("newSessionResponse", response); return response.json()})
+  .then((responseJson) => {return responseJson.sessionId});
+}
 
 export function getSessionSongs(sessionId){
   return fetch('http://localhost:5000/api/Songs/'.concat(sessionId))

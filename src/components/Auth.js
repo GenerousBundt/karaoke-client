@@ -46,7 +46,9 @@ class Auth extends Component {
 
   render() {
       const {loggedIn} = this.state;
+
       if(loggedIn){
+        {SongUtils.createNewSessionIfNoneActive();}
           return(
             <Redirect to='/' />
           );

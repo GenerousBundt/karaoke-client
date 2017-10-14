@@ -1,5 +1,6 @@
 import React, { Component, Input } from 'react';
 import Menu, {SubMenu, MenuItem} from 'rc-menu';
+import { Redirect } from 'react-router';
 import * as SongUtils from '../utils/songUtils';
 import * as Dropdown from 'rc-dropdown';
 import 'rc-dropdown/assets/index.css';
@@ -8,7 +9,12 @@ class NewSong extends Component {
   constructor(props){
     super(props);
 
-    this.state = {url: '', songName: '', sessionStageNames: null, selectedStageName: null, selectedStageNameId: null};
+    this.state = {url: ''
+    , songName: ''
+    , sessionStageNames: null
+    , selectedStageName: null
+    , selectedStageNameId: null
+    , songAdded: null};
 
     this.handleSongNameChange = this.handleSongNameChange.bind(this);
     this.handleUrlChange = this.handleUrlChange.bind(this);
@@ -27,6 +33,7 @@ class NewSong extends Component {
   }
 
   handleSubmit = (event) => {
+    event.preventDefault();
     const song = {
       stageName: this.state.selectedStageName,
       url: this.state.url,
@@ -34,8 +41,12 @@ class NewSong extends Component {
       sessionId: this.props.sessionId,
 
     }
-    SongUtils.addSongToSession(song);
-    event.preventDefault();
+    SongUtils.addSongToSession(song).then((response) => {
+      console.log("we made it to the resopnse");
+      this.setState({loggedIn: true});
+    });
+    
+
   }
 
   handleSongNameChange = (event) => {
@@ -60,35 +71,45 @@ class NewSong extends Component {
           {menuItems}
         </Menu>
       );
-    return (
-        <div>
-        <h2></h2>
-        <form  onSubmit={this.handleSubmit}>
-        <Dropdown
-        trigger={['click']}
-        overlay={menu}
-        animation="slide-up"
-        onVisibleChange={onVisibleChange}
-      >
-        <button style={{ width: 100 }}>{this.state.selectedStageName ? this.state.selectedStageName : 'Your Stage Name'}</button>
-      </Dropdown>
-            <label>
-              <input type="text" value={this.state.songName} placeholder="Name of your Song" onChange={this.handleSongNameChange} />
-            </label>
+
+      const {songAdded} = this.state;
+      if(songAdded){
+          return(
+            <Redirect to='/' />
+          );
+      }
+      else{
+        return (
+          <div>
+          <h2></h2>
+          <form  onSubmit={this.handleSubmit}>
+          <Dropdown
+          trigger={['click']}
+          overlay={menu}
+          animation="slide-up"
+          onVisibleChange={onVisibleChange}
+        >
+          <button style={{ width: 100 }}>{this.state.selectedStageName ? this.state.selectedStageName : 'Your Stage Name'}</button>
+        </Dropdown>
               <label>
-                <input type="text" value={this.state.url} placeholder="Paste your Url" onChange={this.handleUrlChange}  />
+                <input type="text" value={this.state.songName} placeholder="Name of your Song" onChange={this.handleSongNameChange} />
               </label>
-              
-              <br />
-              <input
-                type='submit'
-                value="Let's go!" 
-                />
-              <br />
+                <label>
+                  <input type="text" value={this.state.url} placeholder="Paste your Url" onChange={this.handleUrlChange}  />
+                </label>
+                
+                <br />
+                <input
+                  type='submit'
+                  value="Let's go!" 
+                  />
+                <br />
+      
+          </form>
+        </div>
+      );
+      }
     
-        </form>
-      </div>
-    );
   }
 }
 
