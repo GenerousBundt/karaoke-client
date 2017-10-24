@@ -13,7 +13,7 @@ export function renderSongList(sessionId, draggable) {
   export async function getSession(){
 
     return fetch('http://localhost:5000/api/Session')
-    .then((response) => response.json())
+    .then((response) => {return response.json()})
      .then((responseJson) => { return responseJson.sessionId});
 }
 

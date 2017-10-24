@@ -13,7 +13,7 @@ class SingerSetList extends React.Component{
         const { songs, itemKey } = this.props;
 
         var singerSongList = songs.map((song) => 
-        //<li>{song.title}</li>
+
         <div>
         <div className="song">
             <div className="song-title">{song.title}</div>

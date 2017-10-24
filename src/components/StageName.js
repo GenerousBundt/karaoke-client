@@ -55,7 +55,7 @@ class StageName extends Component {
 
 StageName.propTypes = {
     sessionId: React.PropTypes.number.isRequired,
-    stageNameList: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+    //stageNameList: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 }
 
 export default StageName;

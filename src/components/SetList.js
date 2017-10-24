@@ -6,6 +6,8 @@ import Song from '../models/song';
 import StageName from './StageName';
 import NewSong from './NewSong';
 import Button from '../common/Button';
+import { Redirect } from 'react-router';
+
 
 import * as SongUtils from '../utils/songUtils';
 
@@ -16,7 +18,9 @@ class SetList extends React.Component {
     
     constructor(props){
         super(props);
-        this.state = { rawSongList: null, songList: null }
+        this.state = { rawSongList: null, songList: null, addSong: false }
+        this.addSongToList = this.addSongToList.bind(this);
+
     };
 
     componentWillMount(){
@@ -35,7 +39,8 @@ class SetList extends React.Component {
         return tempSongList;
     }
     addSongToList(){
-        console.log("We're adding a song");
+        this.setState({addSong: true});
+        
     }
 
     updateSongOrder(testList){
@@ -48,6 +53,7 @@ class SetList extends React.Component {
     
     render(){
         
+        if (this.state.addSong) return <Redirect to='/AddSong' />
         var songList = this.state.rawSongList ? this.getSongList() : [];
         if(this.props.draggable){
             return (
@@ -69,8 +75,6 @@ class SetList extends React.Component {
                 <SingerSetList songs = {songList} itemKey="id"/>
                 
                 {/* <StageName sessionId={this.props.sessionId} stageNameList={["Peaches", "Cream", "Brian"]} /> */}
-
-                <NewSong sessionId={this.props.sessionId}/>
                 </div>
             )
         }

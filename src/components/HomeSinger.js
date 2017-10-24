@@ -16,7 +16,6 @@ class HomeSinger extends Component {
   constructor(){
     super();
     this.state = { sessionId: null }
-    console.log("homesinger constructor");
   }
 
   render() {

@@ -42,7 +42,6 @@ class NewSong extends Component {
 
     }
     SongUtils.addSongToSession(song).then((response) => {
-      console.log("we made it to the resopnse");
       this.setState({loggedIn: true});
     });
     
@@ -63,9 +62,11 @@ class NewSong extends Component {
       function onVisibleChange(visible) {
         console.log(visible);
       }
+    const defaultMenuItem = <MenuItem key={-1}>Add Your StageName</MenuItem>
     const menuItems = this.state.sessionStageNames ? 
         this.state.sessionStageNames.map((stageName) => <MenuItem key={stageName.id}>{stageName.name}</MenuItem>) : [<MenuItem key={0}>Waiting</MenuItem>]
 
+    
     const menu = (
         <Menu onSelect={this.onSelect}>
           {menuItems}
