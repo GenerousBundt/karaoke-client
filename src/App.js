@@ -21,6 +21,17 @@ class App extends Component {
     
   }
 
+  componentWillMount() {
+    SongUtils.getSession().then((response) => {
+      console.log("sessionresponse: ", response); 
+      this.setState({sessionId: response});
+      SongUtils.getSessionStageNames(this.state.sessionId).then((response) => {
+        console.log("stageNameResponse: ", response); 
+        this.setState({stageNameList: response})});
+    });
+    
+
+  }
 
   userIsAdmin(){
     var cookies = new Cookies();
@@ -45,16 +56,32 @@ class App extends Component {
       )
     }
     const renderAddSong= () => {
+      if(this.state.sessionId){
         return (
-          <NewSong />
+          <NewSong sessionId={this.state.sessionId}/>
+        )
+      }
+        return(
+          <div>
+            Loading...
+          </div>
         )
       }
 
     const renderAddStageName = () => {
-      this.state.sessionId 
-      return (
-        <StageName  />
-      )
+      if(this.state.stageNameList && this.state.sessionId){
+        return (
+          <StageName  stageNameList={this.state.stageNameList} sessionId={this.state.sessionId}/>
+        )
+      }
+      else{
+        return (
+          <div>
+            Loading...
+          </div>
+        )
+      }
+      
     }
     return (
 

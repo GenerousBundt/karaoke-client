@@ -64,8 +64,9 @@ export function updateSongOrder(songs){
 }
 
 export function addStageNameToSession(stageName, sessionId){
+  console.log("adding stage name: ", stageName, sessionId);
   return fetch('http://localhost:5000/api/StageNames', {
-    method: 'POST',
+    method: 'PUT',
     headers:{
       'Accept': 'application/json',
       'Content-Type': 'application/json',

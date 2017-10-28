@@ -28,7 +28,7 @@ class NewSong extends Component {
   }
 
   onSelect = ({key, item}) => {
-    this.setState({selectedStageName: key});
+    this.setState({selectedStageNameId: key});
     this.setState({selectedStageName: item.props.children});
   }
 
@@ -42,14 +42,18 @@ class NewSong extends Component {
 
     }
     SongUtils.addSongToSession(song).then((response) => {
-      this.setState({loggedIn: true});
+      if(response.status === 200){
+        this.setState({songAdded: true});
+      }
     });
     
 
   }
+  onVisibleChange= (visible) => {
+    console.log(visible);
+  }
 
   handleSongNameChange = (event) => {
-    console.log("SongNameChange: ", event.target.value);
     this.setState({songName: event.target.value});
   }
 
@@ -58,14 +62,19 @@ class NewSong extends Component {
   }
 
   render() {
+    console.log("selectedStageNameId: ", this.state.selectedStageNameId);
+    if(this.state.selectedStageNameId === -1){
+      return(
+        <Redirect to='/AddStageName' />
+      )
+    }
       
-      function onVisibleChange(visible) {
-        console.log(visible);
-      }
-    const defaultMenuItem = <MenuItem key={-1}>Add Your StageName</MenuItem>
-    const menuItems = this.state.sessionStageNames ? 
-        this.state.sessionStageNames.map((stageName) => <MenuItem key={stageName.id}>{stageName.name}</MenuItem>) : [<MenuItem key={0}>Waiting</MenuItem>]
 
+    const defaultMenuItem = <MenuItem key={-1}>Add Your StageName</MenuItem>
+    let menuItems = this.state.sessionStageNames ? 
+        this.state.sessionStageNames.map((stageName) => <MenuItem key={stageName.id}>{stageName.name}</MenuItem>) : [<MenuItem key={0}>Waiting</MenuItem>];
+        
+    menuItems.push(defaultMenuItem);
     
     const menu = (
         <Menu onSelect={this.onSelect}>
@@ -79,7 +88,9 @@ class NewSong extends Component {
             <Redirect to='/' />
           );
       }
+      
       else{
+
         return (
           <div>
           <h2></h2>
@@ -88,7 +99,7 @@ class NewSong extends Component {
           trigger={['click']}
           overlay={menu}
           animation="slide-up"
-          onVisibleChange={onVisibleChange}
+          onVisibleChange={this.onVisibleChange}
         >
           <button style={{ width: 100 }}>{this.state.selectedStageName ? this.state.selectedStageName : 'Your Stage Name'}</button>
         </Dropdown>

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { Redirect }from 'react-router';
 import * as SongUtils from '../utils/songUtils';
 
 class StageName extends Component {
   constructor(props){
     super(props);
 
-    this.state = {stageName: ''};
+    this.state = {stageName: '', returnToSetList: false, errorOnAddStageName: false};
 
     this.handleStageNameChange = this.handleStageNameChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,21 +19,41 @@ class StageName extends Component {
     //check that state.stageName is 3 characters long, not whitespace, and does not already exist
     //if so, alert the rules
     var stageName = this.state.stageName;
-    if(stageName.length < 3 || stageName.indexOf(' ') > 0 ){
+    const existingStageNames = this.props.stageNameList.map(s => s.name);
+    event.preventDefault();
+    if(stageName.length < 3 || stageName.includes(' ') > 0 ){
         alert('Your stage name must be at least three characters long and contain no white spaces');
-        event.preventDefault();
         return;
     }
-    if(this.props.stageNameList.indexOf(stageName) > 0){
+    if(existingStageNames.indexOf(stageName) > 0){
         alert('That stage name is already taken tonight. Please choose another');
-        event.preventDefault();
         return;
     }
     //if valid, add name to the session and redirect to the AddSong page
-    SongUtils.addStageNameToSession(this.state.stageName, this.props.sessionId);
-  }
+    SongUtils.addStageNameToSession(this.state.stageName, this.props.sessionId).then((response) => {
+      if(response.status == 200){
+        this.setState({returnToSetList: true});
+      }
+      else{
+        this.setState({errorOnAddStageName: true});
+      }
+    })};
+
   render() {
-    return (
+    if(this.state.returnToSetList === true){
+      return(
+        <Redirect to='/AddSong' />
+      );
+    }
+    else if(this.state.errorOnAddStageName === true){
+      return(
+        <div>
+          Something went wrong. Refresh the page and try again.
+        </div>
+      )
+    }
+    else{
+      return (
         <div>
         <h2>Join the party!</h2>
         <form onSubmit={this.handleSubmit}>
@@ -50,6 +71,8 @@ class StageName extends Component {
         </form>
         </div>
     );
+    }
+    
   }
 }
 

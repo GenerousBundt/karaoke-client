@@ -18,13 +18,16 @@ class SetList extends React.Component {
     
     constructor(props){
         super(props);
-        this.state = { rawSongList: null, songList: null, addSong: false }
+        this.state = { rawSongList: null, songList: null, addSong: false, addSongButtonVisible: false }
         this.addSongToList = this.addSongToList.bind(this);
 
     };
 
     componentWillMount(){
         SongUtils.getSessionSongs(this.props.sessionId).then((response) => this.setState({rawSongList: response}));
+        if(this.props.sessionId != -1){
+            this.setState({addSongButtonVisible: true});
+        }
     }
 
     onListChange(newList){
@@ -52,13 +55,13 @@ class SetList extends React.Component {
     
     
     render(){
-        
+        const buttonStyle = (this.state.addSongButtonVisible) ? 'button-visible' : 'button-hidden';
         if (this.state.addSong) return <Redirect to='/AddSong' />
         var songList = this.state.rawSongList ? this.getSongList() : [];
         if(this.props.draggable){
             return (
                 <div className="list-group">
-                    <Button label="Add Song" onClick={this.addSongToList} />
+                    <Button className={buttonStyle} label="Add Song" onClick={this.addSongToList} />
                     <div>
                     <DraggableList list={songList} template={SongDraggable} itemKey="id" onMoveEnd={newList => this.onListChange(newList)}/>
                     </div>
@@ -71,7 +74,7 @@ class SetList extends React.Component {
         else{
             return (
                 <div>
-                <Button label="Add Song" onClick={this.addSongToList} />
+                <Button className={buttonStyle} label="Add Song" onClick={this.addSongToList} />
                 <SingerSetList songs = {songList} itemKey="id"/>
                 
                 {/* <StageName sessionId={this.props.sessionId} stageNameList={["Peaches", "Cream", "Brian"]} /> */}
