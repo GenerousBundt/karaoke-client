@@ -1,5 +1,16 @@
+
 .app {
+/*
+UI Design by Andrea Anger
+COLORS:
+  dark red: #570f04 75% white 80%
+
+  Song: 100%
+  Artist: 55%
+  Song Box: 9%
+*/
   text-align: center;
+  color: white;
 }
 
 .app-logo {
@@ -11,7 +22,6 @@
   background-color: #222;
   height: 150px;
   padding: 20px;
-  color: white;
 }
 
 .app-intro {
@@ -21,6 +31,23 @@
 .app-songlist {
   font-size: large;
   padding: 20px;
+  margin: 15px 15% 40px;
+}
+
+.Song {
+  background-color: rgba(255, 255, 255, .1);
+  padding: 5px 0;
+}
+
+.song-title {
+  color:white;
+  text-transform: uppercase;
+  font-size: 1em;
+}
+
+.song-stageName {
+  color: rgba(255, 255, 255, .55);
+  font-size: .8em;
 }
 
 .list-item-singer {
@@ -37,4 +64,13 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+
+#launch-button {
+  background-color: rgba(87, 15, 4, .7);
+  color:rgba(255, 255, 255, 0.8);
+  border: none;
+  font-size: .8em;
+  padding: 9px 20%;
 }

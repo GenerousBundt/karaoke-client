@@ -67,12 +67,11 @@ class SetList extends React.Component {
                     </div>
 
                 </div>
-
             )
-    
         }
         else{
             return (
+
                 <div>
                 <Button className={buttonStyle} label="Add Song" onClick={this.addSongToList} />
                 <SingerSetList songs = {songList} itemKey="id"/>
