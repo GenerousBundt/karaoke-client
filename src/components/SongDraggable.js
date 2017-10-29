@@ -14,8 +14,8 @@ class SongDraggable extends React.Component{
 
         return (
             <div>
-            {dragHandle(<div className="Song">
-                {this.props.address}
+            {dragHandle(<div className="song">
+                {this.props.address} 
                 <div className="song-title">{item.title}</div>
                 <div className="song-stageName">{item.stageName}</div>
             </div>)}
