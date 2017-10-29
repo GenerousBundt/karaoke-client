@@ -55,7 +55,7 @@ class SetList extends React.Component {
     
     
     render(){
-        const buttonStyle = (this.state.addSongButtonVisible) ? 'button-visible' : 'button-hidden';
+        const buttonStyle = (this.state.addSongButtonVisible) ? 'add-song-button' : 'button-hidden';
         if (this.state.addSong) return <Redirect to='/AddSong' />
         var songList = this.state.rawSongList ? this.getSongList() : [];
         if(this.props.draggable){

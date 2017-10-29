@@ -3,15 +3,17 @@ import React, { Component } from 'react';
 class Button extends Component {
   constructor(props){
     super(props);
+
+    
   }
 
 
   render() {
     const handleClick = this.props.onClick;
     return (
-        <div className="app-button">
+        <div>
         {/* <img src={logo} className="app-logo" alt="logo" /> */}
-        <button onClick={handleClick}>{this.props.label}</button>
+        <button className={this.props.className} onClick={handleClick}>{this.props.label}</button>
       </div>
     );
   }
@@ -20,6 +22,7 @@ class Button extends Component {
 Button.propTypes = {
     label: React.PropTypes.string.isRequired,
     onClick: React.PropTypes.func.isRequired,
+    classname: React.PropTypes.string.isRequired,
 }
 
 export default Button;

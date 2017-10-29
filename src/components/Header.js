@@ -14,6 +14,7 @@ class Header extends Component {
           <img src={logo} className="app-logo" alt="logo" />
         {/* <h2>{headerText}</h2> */}
       </div>
+      
     );
   }
 }
