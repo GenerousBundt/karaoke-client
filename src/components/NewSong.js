@@ -63,7 +63,7 @@ class NewSong extends Component {
 
   render() {
     console.log("selectedStageNameId: ", this.state.selectedStageNameId);
-    if(this.state.selectedStageNameId === -1){
+    if(this.state.selectedStageNameId == -1){
       return(
         <Redirect to='/AddStageName' />
       )
