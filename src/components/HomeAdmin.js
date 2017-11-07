@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 //import logo from '../../resources/man-singing.svg';
 import SetList from './SetList';
-import * as Session from '../services/Session';
 import * as SongUtils from '../utils/songUtils';
 import PageTitle from './PageTitle';
 
