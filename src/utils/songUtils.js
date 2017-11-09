@@ -92,7 +92,7 @@ export function getSessionStageNames(sessionId){
 export function addSongToSession(song){
   //var jsonBody = JSON.stringify(song);
   return fetch(`${karaokeApi}/api/Songs`, {
-    method: 'POSt',
+    method: 'POST',
     headers:{
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -109,4 +109,10 @@ export function addSongToSession(song){
       }
     )
   });
-}
+};
+
+export function deleteSongFromSession(songId){
+  return fetch(`${karaokeApi}/api/Songs/${songId}`, {
+  method: 'DELETE',})
+  .then((response) => {return response.status});
+};
