@@ -23,7 +23,7 @@ class SetList extends React.Component {
 
     };
 
-    componentWillMount(){
+    componentDidMount(){
         SongUtils.getSessionSongs(this.props.sessionId).then((response) => this.setState({rawSongList: response}));
         if(this.props.sessionId != -1){
             this.setState({addSongButtonVisible: true});

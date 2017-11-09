@@ -12,7 +12,7 @@ class Home extends Component {
     this.state = { sessionId: null, userIsAdmin: null }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     SongUtils.getSession().then((response) => this.setState({sessionId: response}));
   }
 

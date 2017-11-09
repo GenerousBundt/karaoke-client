@@ -13,13 +13,10 @@ class AddSong extends React.Component {
 
 
     };
-    componentWillMount() {
-        console.log("componentWillMount");
-        SongUtils.getSession().then((response) => {console.log("sessionresponse: ", response); this.setState({sessionId: response})});
-
+    componentDidMount() {
+        SongUtils.getSession().then((response) => {this.setState({sessionId: response})});
       }
     render(){
-        console.log('sessionId: ', this.state.sessionId);
         if(this.state.sessionId){
             return (
                 <div className="app-addSong">
