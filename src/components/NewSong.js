@@ -50,7 +50,8 @@ class NewSong extends Component {
 
   }
   onVisibleChange= (visible) => {
-    console.log(visible);
+    // not sure if we need this handler. leaving for now.
+    //console.log(visible);
   }
 
   handleSongNameChange = (event) => {
@@ -62,7 +63,6 @@ class NewSong extends Component {
   }
 
   render() {
-    console.log("selectedStageNameId: ", this.state.selectedStageNameId);
     if(this.state.selectedStageNameId == -1){
       return(
         <Redirect to='/AddStageName' />

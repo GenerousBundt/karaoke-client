@@ -21,7 +21,7 @@ class App extends Component {
     
   }
 
-  componentWillMount() {
+  componentDidMount() {
     SongUtils.getSession().then((response) => {
       this.setState({sessionId: response});
       SongUtils.getSessionStageNames(this.state.sessionId).then((response) => {

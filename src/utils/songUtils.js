@@ -43,7 +43,7 @@ export function createNewSessionIfNoneActive(){
       'Content-Type': 'application/json',
     },
   })
-  .then((response) => {console.log("newSessionResponse", response); return response.json()})
+  .then((response) => { return response.json()})
   .then((responseJson) => {return responseJson.sessionId});
 }
 
@@ -66,7 +66,6 @@ export function updateSongOrder(songs){
 }
 
 export function addStageNameToSession(stageName, sessionId){
-  console.log("adding stage name: ", stageName, sessionId);
   return fetch(`${karaokeApi}/api/StageNames`, {
     method: 'PUT',
     headers:{
